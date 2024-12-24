@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpForce;
     [SerializeField] Sprite ride;
     [SerializeField] Sprite push;
+    [SerializeField] Sprite jump;
 
     [SerializeField] LayerMask jumpableGround;
 
@@ -96,7 +97,15 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded())
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            sr.sprite = jump;
         }
+
+        /*
+        if(!isGrounded())
+        {
+            
+        }
+        */
 
 
         }
