@@ -8,8 +8,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float pushForce;
     [SerializeField] float stopForce;
     [SerializeField] float maxSpeed;
+    [SerializeField] float jumpForce;
     [SerializeField] Sprite ride;
     [SerializeField] Sprite push;
+
+    [SerializeField] LayerMask jumpableGround;
 
     //public variables
 
@@ -21,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody2D rb;
     SpriteRenderer sr;
+    BoxCollider2D bc;
 
 
     // Start is called before the first frame update
@@ -31,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         //Set Components
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        bc = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -88,6 +93,12 @@ public class PlayerMovement : MonoBehaviour
             }
             */
 
+        if(Input.GetKeyDown(KeyCode.Space) && isGrounded())
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+
+
         }
 
     private void FixedUpdate()
@@ -100,6 +111,11 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector2.left * stopForce, ForceMode2D.Force);
         }
+    }
+
+    private bool isGrounded()
+    {
+        return Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.down, 0.1f, jumpableGround);
     }
 
 
