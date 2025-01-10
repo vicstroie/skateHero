@@ -44,6 +44,12 @@ public class CameraMovement : MonoBehaviour
                 {
                     cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, 15, 0.005f);
                 }
+            } else if(playerSpeed < 10)
+            {
+                if (cam.orthographicSize > 10)
+                {
+                    cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, 10, 0.005f);
+                }
             }
         }
 
