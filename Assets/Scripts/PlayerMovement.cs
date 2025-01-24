@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Sprite push;
     [SerializeField] Sprite jump;
     [SerializeField] Sprite hold;
+    [SerializeField] Sprite holdLeft;
 
     [SerializeField] LayerMask jumpableGround;
 
@@ -80,12 +81,14 @@ public class PlayerMovement : MonoBehaviour
             if(Input.GetKey(KeyCode.D))
             {
                 this.transform.position += new Vector3(walkSpeed * Time.deltaTime, 0, 0);
-                sr.flipX = false;
+
+                if(sr.sprite != hold) sr.sprite = hold;
+
             }
             if(Input.GetKey(KeyCode.A))
             {
                 this.transform.position += new Vector3(-walkSpeed * Time.deltaTime, 0, 0);
-                sr.flipX = true;
+                if (sr.sprite != holdLeft) sr.sprite = holdLeft;
             }
 
 
